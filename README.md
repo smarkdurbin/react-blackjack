@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# react-blackjack
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+It is currently hosted on Amazon S3 [here](http://react-blackjack.s3-website.us-east-1.amazonaws.com/), using CodePipeline and CodeBuild for CI/CD.
 
 ## Available Scripts
 

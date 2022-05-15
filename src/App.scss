@@ -153,6 +153,8 @@ body {
   font-size: 8rem;
   border: 0.125rem solid rgba(0, 0, 0, 0.3125);
   border-radius: 0.25rem;
+  background-blend-mode: color-dodge;
+  background-clip: padding-box;
 
   @extend .bg-white;
   @extend .d-inline-block;
@@ -170,6 +172,7 @@ body {
 
   &[data-suit="NONE"] {
     @extend .bg-primary;
+    @extend .bg-gradient;
     @extend .text-light;
   }
 }
