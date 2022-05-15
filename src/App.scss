@@ -39,6 +39,8 @@ body {
 .GameInfo > .navbar > .container > .navbar-brand {
   font-family: "Pacifico";
   font-size: 1.375rem;
+
+  @extend .text-warning;
 }
 
 .GameInfo > .navbar > .container > .navbar-text {
@@ -417,4 +419,8 @@ body {
     @extend .bg-gradient;
     @extend .bg-pink;
   }
+}
+
+.font-script {
+  font-family: "Pacifico";
 }

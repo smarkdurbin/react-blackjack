@@ -5,6 +5,8 @@ import GameInfo from "./GameInfo";
 import Shoe from "../lib/blackjack/shoe";
 import scoreHand from "../lib/blackjack/scoreHand";
 import determineWinner from "../lib/blackjack/determineWinner";
+import GameModal from "./GameModal";
+import { Button } from "react-bootstrap";
 
 const Game = () => {
   // Set up state for game.
@@ -13,6 +15,7 @@ const Game = () => {
   const [dealerStaying, setdealerStaying] = useState(false);
   const [dealerWinsCount, setDealerWinsCount] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [modalContent, setModalContent] = useState(false);
   const [playerBank, setPlayerBank] = useState(100);
   const [playerBet, setPlayerBet] = useState(10);
   const [playerHand, setPlayerHand] = useState([]);
@@ -22,6 +25,7 @@ const Game = () => {
   const [rounds, setRounds] = useState([]);
   const [roundStarted, setRoundStarted] = useState(false);
   const [shoe, setShoe] = useState([...Shoe()]);
+  const [showModal, setShowModal] = useState(false);
   const [winner, setWinner] = useState(false);
 
   // Changes player bet.
@@ -177,6 +181,9 @@ const Game = () => {
 
     // Set round started.
     setRoundStarted(true);
+
+    // Set show modal.
+    setShowModal(false);
   };
 
   // Hook on round started.
@@ -249,6 +256,9 @@ const Game = () => {
 
         // Set player bank.
         setPlayerBank(playerBank - playerBet);
+
+        // Set modal content.
+        setModalContent(dealerWinsModalContent);
       }
 
       // If winner equals Player.
@@ -258,9 +268,94 @@ const Game = () => {
 
         // Set player bank.
         setPlayerBank(playerBank + playerBet);
+
+        // Set modal content.
+        setModalContent(playerWinsModalContent);
       }
+
+      // Set show modal.
+      setShowModal(true);
     }
   }, [winner]);
+
+  // Define player wins modal content.
+  const playerWinsModalContent = (
+    <div className="text-center">
+    <span className="h1 mb-4 d-block" dangerouslySetInnerHTML={{ __html: "&#128077;" }} />
+      <h1 className="mb-5">
+        <span className="font-script text-warning">You won this round!</span>
+      </h1>
+      <p>
+        <Button
+          className="PlayAgainButton"
+          onClick={() => {
+            setShowModal(false);
+            startRound();
+          }}
+        >
+          <span>Play Again</span>
+        </Button>
+      </p>
+    </div>
+  );
+
+  // Define dealer wins modal content.
+  const dealerWinsModalContent = (
+    <div className="text-center">
+      <span className="h1 mb-4 d-block" dangerouslySetInnerHTML={{ __html: "&#x1F44E;" }} />
+      <h1 className="mb-5">
+        <span className="font-script text-warning">
+          You lost this round&hellip;
+        </span>
+      </h1>
+      <p>
+        <Button
+          className="PlayAgainButton"
+          onClick={() => {
+            setShowModal(false);
+            startRound();
+          }}
+        >
+          <span>Play Again</span>
+        </Button>
+      </p>
+    </div>
+  );
+
+  // Define default modal content.
+  const defaultModalContent = (
+    <div className="text-center">
+      <h1 className="mb-4">
+        <span className="h6">Welcome to</span>
+        <br />
+        <span className="font-script text-warning">React Blackjack</span>
+      </h1>
+      <h2 className="mb-3 h5">How to play</h2>
+      <p className="mb-5">
+        Press play to start a new round.
+        <br />Press the hit control to receive another card.
+        <br />Press stay to keep your hand and pass turn to the dealer.
+        <br />You can change your bet between rounds by selecting the chips below the play controls.
+      </p>
+      <p>
+        <Button
+          className="PlayAgainButton"
+          onClick={() => {
+            setShowModal(false);
+            startRound();
+          }}
+        >
+          <span>Let's Play</span>
+        </Button>
+      </p>
+    </div>
+  );
+
+  // Hook on component mount.
+  useEffect(() => {
+    // Set show modal.
+    setShowModal(true);
+  }, []);
 
   return (
     <div className="Game">
@@ -291,6 +386,11 @@ const Game = () => {
         roundStarted={roundStarted}
         startRound={startRound}
         winner={winner}
+      />
+      <GameModal
+        content={modalContent}
+        defaultContent={defaultModalContent}
+        show={showModal}
       />
     </div>
   );
