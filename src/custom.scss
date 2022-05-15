@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
+/** Import functions. */
+@import "~bootstrap/scss/functions";
+
+
+/** Variable Overrides */
+$enable-gradients: true;
+$enable-negative-margins: true;
+$enable-rounded: false;
+$font-family-sans-serif: "Roboto";
+$gradient: linear-gradient(135deg, rgba(#FFF, .3125), rgba(#000, .3125)) !default;
+
+
+/** Import variables. */
+@import "~bootstrap/scss/variables";
+
+/** Import mixins and root. */
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/root";
+
+// /** Custom colors */
+$custom-colors: (
+  "cyan": $cyan,
+  "indigo": $indigo,
+  "orange": $orange,
+  "pink": $pink,
+  "teal": $teal,
+  "yellow": $yellow,
+);
+
+// /** Merge the maps */
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "~bootstrap/scss/utilities";
+
+$all-colors: map-merge($theme-colors, $custom-colors);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "background-color": map-merge(
+      map-get($utilities, "background-color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "background-color"), "values"),
+          (
+            $all-colors
+          ),
+        ),
+      ),
+    ),
+  )
+);
+
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/helpers";
+
+@import "~bootstrap/scss/utilities/api";
+
+/* import bootstrap to set changes */
+@import "~bootstrap/scss/bootstrap";

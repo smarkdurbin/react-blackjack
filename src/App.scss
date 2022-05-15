@@ -1,0 +1,417 @@
+@import "custom";
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+#root {
+  @extend .h-100;
+  @extend .w-100;
+}
+
+.App {
+  @extend .h-100;
+  @extend .w-100;
+}
+
+.Game {
+  background-blend-mode: color-dodge;
+
+  @extend .bg-gradient;
+  @extend .bg-indigo;
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .h-100;
+  @extend .w-100;
+}
+
+.GameInfo {
+  // border-bottom: 0.25rem solid rgba(0, 0, 0, 0.125);
+  box-sizing: border-box;
+}
+
+.GameInfo > .navbar {
+  background: none !important;
+}
+
+.GameInfo > .navbar > .container > .navbar-brand {
+  font-family: "Pacifico";
+  font-size: 1.375rem;
+}
+
+.GameInfo > .navbar > .container > .navbar-text {
+  font-size: 1rem;
+
+  @extend .px-3;
+  @extend .py-2;
+  @extend .badge;
+  @extend .bg-primary;
+  @extend .bg-gradient;
+  @extend .rounded-pill;
+  @extend .mb-0;
+}
+
+.modal-content {
+  @extend .bg-primary;
+  @extend .bg-gradient;
+  @extend .text-white;
+}
+
+.PlayAgainButton {
+  @extend .d-inline-block;
+  @extend .w-25;
+  @extend .rounded-circle;
+  @extend .p-0;
+  @extend .position-relative;
+  @extend .btn-success;
+  @extend .bg-gradient;
+  @extend .mb-5;
+  border-width: 0.5rem;
+  outline: 0.5rem solid rgba(0, 0, 0, 0.1875);
+  position: relative;
+  background-blend-mode: color-dodge;
+
+  &:before {
+    content: "\25B6";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  & > span {
+    font-family: "Fjalla One";
+    left: 50%;
+    letter-spacing: 0.03125rem;
+    transform: translateX(-50%);
+    white-space: nowrap;
+
+    @extend .position-absolute;
+    @extend .pt-5;
+    @extend .text-uppercase;
+    @extend .top-100;
+  }
+}
+
+.GameBoard {
+  @extend .align-items-center;
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .flex-grow-1;
+  @extend .h-100;
+  @extend .justify-content-center;
+  @extend .py-4;
+  @extend .py-lg-5;
+}
+
+.GameBoard > .container {
+  @extend .h-100;
+}
+
+.GameBoard > .container > .row {
+  @extend .align-content-center;
+  @extend .h-100;
+  @extend .justify-content-center;
+}
+
+.GameBoard > .container > .row > .col {
+  @extend .col-12;
+  @extend .col-lg-8;
+  @extend .h-50;
+}
+
+.Hand {
+  @extend .w-100;
+  @extend .h-100;
+  @extend .d-flex;
+  @extend .justify-content-center;
+}
+
+.Hand > .row {
+  margin: 0 -1.25rem;
+
+  @extend .align-content-center;
+  @extend .justify-content-center;
+}
+
+.Hand > .row > .col {
+  padding: 0 1.25rem;
+  @extend .overflow-visible;
+  @extend .position-relative;
+}
+
+.Card {
+  font-size: 8rem;
+  border: 0.125rem solid rgba(0, 0, 0, 0.3125);
+  border-radius: 0.25rem;
+
+  @extend .bg-white;
+  @extend .d-inline-block;
+  @extend .display-1;
+  @extend .lh-1;
+  @extend .mb-0;
+  @extend .p-1;
+  @extend .position-absolute;
+  @extend .translate-middle;
+
+  &[data-suit="DIAMONDS"],
+  &[data-suit="HEARTS"] {
+    @extend .text-danger;
+  }
+
+  &[data-suit="NONE"] {
+    @extend .bg-primary;
+    @extend .text-light;
+  }
+}
+
+.GameControls {
+  @extend .py-4;
+  @extend .py-lg-5;
+}
+
+.PlayControls {
+  @extend .mb-4;
+  @extend .mb-lg-5;
+}
+
+.PlayControls > .container > .row,
+.BetControls > .container > .row {
+  @extend .justify-content-center;
+}
+
+.PlayControls > .container > .row > .col {
+  @extend .col-8;
+  @extend .col-md-6;
+  @extend .col-lg-4;
+  @extend .col-xl-3;
+}
+
+.BetControls > .container > .row > .col {
+  @extend .col-10;
+  @extend .col-md-8;
+  @extend .col-lg-6;
+  @extend .col-xl-4;
+}
+
+.PlayControls > .container > .row > .col > .row,
+.BetControls > .container > .row > .col > .row {
+  @extend .align-items-start;
+  @extend .justify-content-center;
+}
+
+.PlayControls > .container > .row > .col > .row > .col,
+.BetControls > .container > .row > .col > .row > .col {
+  @extend .col-3;
+  @extend .col-lg-3;
+  @extend .text-center;
+}
+
+.PlayControls > .container > .row > .col > .row > .col {
+  @extend .pb-4;
+}
+
+.StartRoundButton,
+.PlayerHitButton,
+.PlayerStayButton {
+  border-width: 0.25rem;
+  outline: 0.25rem solid rgba(0, 0, 0, 0.1875);
+
+  @extend .bg-gradient;
+  @extend .d-block;
+  @extend .p-0;
+  @extend .position-relative;
+  @extend .rounded-circle;
+  @extend .w-100;
+
+  &:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  & > span {
+    font-family: "Fjalla One";
+    left: 50%;
+    letter-spacing: 0.03125rem;
+    transform: translateX(-50%);
+
+    @extend .position-absolute;
+    @extend .pt-2;
+    @extend .text-uppercase;
+    @extend .top-100;
+  }
+}
+
+.StartRoundButton {
+  @extend .btn-success;
+  position: relative;
+  background-blend-mode: color-dodge;
+
+  &:before {
+    content: "\25B6";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.25rem;
+  }
+}
+
+.PlayerHitButton {
+  @extend .btn-orange;
+  @extend .text-white;
+  position: relative;
+  background-blend-mode: color-dodge;
+
+  &:before {
+    content: "\1F0A0";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+  }
+}
+
+.PlayerStayButton {
+  @extend .btn-primary;
+  background-blend-mode: color-dodge;
+
+  &:before {
+    content: "\1F591";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+  }
+}
+
+.OneDollarBetButton,
+.FiveDollarBetButton,
+.TenDollarBetButton,
+.TwentyFiveDollarBetButton {
+  border-width: 0.25rem;
+  box-sizing: border-box;
+  background-blend-mode: color-dodge;
+  outline: 0.25rem solid rgba(0, 0, 0, 0.1875);
+  background-clip: padding-box;
+
+  @extend .d-block;
+  @extend .p-0;
+  @extend .position-relative;
+  @extend .rounded-circle;
+  @extend .w-100;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+    background: conic-gradient(
+      white 0deg 30deg,
+      transparent 30deg 60deg,
+      white 60deg 90deg,
+      transparent 90deg 120deg,
+      white 120deg 150deg,
+      transparent 150deg 180deg,
+      white 180deg 210deg,
+      transparent 210deg 240deg,
+      white 240deg 270deg,
+      transparent 270deg 300deg,
+      white 300deg 330deg,
+      transparent 330deg 360deg
+    );
+
+    @extend .rounded-circle;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  & > span {
+    top: 0.25rem;
+    right: 0.25rem;
+    bottom: 0.25rem;
+    left: 0.25rem;
+    box-sizing: border-box;
+    border: 0.25rem solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    background-blend-mode: color-dodge;
+    background-clip: padding-box;
+    @extend .position-absolute;
+    @extend .rounded-circle;
+  }
+
+  & > span > span {
+    font-family: "Fjalla One";
+    left: 50%;
+    letter-spacing: 0.03125rem;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    @extend .position-absolute;
+    @extend .text-white;
+    @extend .h5;
+    @extend .m-0;
+  }
+
+  &[data-inactive="true"] {
+    opacity: 0.5;
+  }
+}
+
+.OneDollarBetButton {
+  @extend .bg-gradient;
+  @extend .btn-cyan;
+
+  & > span {
+    @extend .bg-gradient;
+    @extend .bg-cyan;
+  }
+}
+
+.FiveDollarBetButton {
+  @extend .bg-gradient;
+  @extend .btn-yellow;
+
+  & > span {
+    @extend .bg-gradient;
+    @extend .bg-yellow;
+  }
+}
+
+.TenDollarBetButton {
+  @extend .bg-gradient;
+  @extend .btn-orange;
+
+  & > span {
+    @extend .bg-gradient;
+    @extend .bg-orange;
+  }
+}
+
+.TwentyFiveDollarBetButton {
+  @extend .bg-gradient;
+  @extend .btn-pink;
+
+  & > span {
+    @extend .bg-gradient;
+    @extend .bg-pink;
+  }
+}
