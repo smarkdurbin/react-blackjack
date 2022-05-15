@@ -281,7 +281,10 @@ const Game = () => {
   // Define player wins modal content.
   const playerWinsModalContent = (
     <div className="text-center">
-    <span className="h1 mb-4 d-block" dangerouslySetInnerHTML={{ __html: "&#128077;" }} />
+      <span
+        className="h1 mb-4 d-block"
+        dangerouslySetInnerHTML={{ __html: "&#128077;" }}
+      />
       <h1 className="mb-5">
         <span className="font-script text-warning">You won this round!</span>
       </h1>
@@ -302,7 +305,10 @@ const Game = () => {
   // Define dealer wins modal content.
   const dealerWinsModalContent = (
     <div className="text-center">
-      <span className="h1 mb-4 d-block" dangerouslySetInnerHTML={{ __html: "&#x1F44E;" }} />
+      <span
+        className="h1 mb-4 d-block"
+        dangerouslySetInnerHTML={{ __html: "&#x1F44E;" }}
+      />
       <h1 className="mb-5">
         <span className="font-script text-warning">
           You lost this round&hellip;
@@ -332,10 +338,21 @@ const Game = () => {
       </h1>
       <h2 className="mb-3 h5">How to play</h2>
       <p className="mb-5">
-        Press play to start a new round.
-        <br />Press the hit control to receive another card.
-        <br />Press stay to keep your hand and pass turn to the dealer.
-        <br />You can change your bet between rounds by selecting the chips below the play controls.
+        Press <span className="text-uppercase fw-bold text-warning">play</span>{" "}
+        to start a new round.
+        <br />
+        Press <span className="text-uppercase fw-bold text-warning">
+          hit
+        </span>{" "}
+        to receive another card.
+        <br />
+        Press <span className="text-uppercase fw-bold text-warning">
+          stay
+        </span>{" "}
+        to keep your hand and pass turn to the dealer.
+        <br />
+        You can change your bet between rounds by selecting the chips below the
+        play controls.
       </p>
       <p>
         <Button
