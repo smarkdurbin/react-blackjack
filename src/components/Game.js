@@ -332,12 +332,10 @@ const Game = () => {
   const defaultModalContent = (
     <div className="text-center">
       <h1 className="mb-4">
-        <span className="h6">Welcome to</span>
-        <br />
         <span className="font-script text-warning">React Blackjack</span>
       </h1>
       <h2 className="mb-3 h5">How to play</h2>
-      <p className="mb-5">
+      <p className="mb-5 lh-lg">
         Press <span className="text-uppercase fw-bold text-warning">play</span>{" "}
         to start a new round.
         <br />
@@ -349,10 +347,11 @@ const Game = () => {
         Press <span className="text-uppercase fw-bold text-warning">
           stay
         </span>{" "}
-        to keep your hand and pass turn to the dealer.
+        to keep your hand.
         <br />
-        You can change your bet between rounds by selecting the chips below the
-        play controls.
+        Press a{" "}
+        <span className="text-uppercase fw-bold text-warning">chip</span> to
+        change your bet.
       </p>
       <p>
         <Button
