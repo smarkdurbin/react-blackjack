@@ -2,6 +2,8 @@ const scoreHand = (hand) => {
   // If hand length is zero, return 0.
   if (hand.length === 0) return 0;
 
+  console.log(hand);
+
   // Pull aces out of the hand.
   const aces = hand.filter((card) => card.name === "Ace");
 

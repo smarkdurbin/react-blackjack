@@ -38,15 +38,15 @@ const getCardHtmlEntity = (name, suit) => {
   // If card name is not a number.
   if (isNaN(name)) {
     switch (name) {
-      case "JACK":
+      case "Jack":
         // Set card code.
         cardCode += 10;
         break;
-      case "QUEEN":
+      case "Queen":
         // Set card code.
         cardCode += 12;
         break;
-      case "KING":
+      case "King":
         // Set card code.
         cardCode += 13;
         break;
