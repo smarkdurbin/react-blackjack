@@ -3,6 +3,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 
 const GameControls = ({
   changePlayerBet,
+  gameOver,
   startRound,
   playerHit,
   playerStay,
@@ -51,7 +52,10 @@ const GameControls = ({
 
   // Define player can start round.
   const playerCanStartRound = () => {
-    // If winner, return false.
+    // If game over, return false.
+    if(gameOver) return false;
+
+    // If winner, return true.
     if (winner) return true;
 
     // If round started, return false.

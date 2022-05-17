@@ -6,7 +6,7 @@ import Shoe from "../lib/blackjack/shoe";
 import scoreHand from "../lib/blackjack/scoreHand";
 import determineWinner from "../lib/blackjack/determineWinner";
 import GameModal from "./GameModal";
-import { Button } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 
 const Game = () => {
   // Set up state for game.
@@ -89,7 +89,16 @@ const Game = () => {
   };
 
   // Ends the game.
-  const endGame = () => {};
+  const endGame = () => {
+    // Set modal content.
+    setModalContent(gameOverModalContent);
+
+    // Set show modal.
+    showModal(true);
+
+    // Set shoe.
+    setShoe([]);
+  };
 
   // Ends the round.
   const endRound = () => {
@@ -168,7 +177,7 @@ const Game = () => {
     if (playerBank < playerBet) setPlayerBet(playerBank);
 
     // If player bank is zero, end game.
-    if (playerBank === 0) endGame();
+    if (playerBank === 0) setGameOver(true);
 
     // If round started.
     if (roundStarted && !winner) return;
@@ -273,10 +282,22 @@ const Game = () => {
         setModalContent(playerWinsModalContent);
       }
 
-      // Set show modal.
-      setShowModal(true);
+      // Set timeout.
+      setTimeout(() => {
+        // Set show modal.
+        setShowModal(true);
+      }, 900);
     }
   }, [winner]);
+
+  // Hook on game over.
+  useEffect(() => {
+    // If game over.
+    if (gameOver) {
+      // Call end game.
+      endGame();
+    }
+  }, [gameOver]);
 
   // Define player wins modal content.
   const playerWinsModalContent = (
@@ -288,7 +309,8 @@ const Game = () => {
       <h1 className="mb-5">
         <span className="font-script text-warning">You won this round!</span>
       </h1>
-      <p>
+      <RoundScores dealerScore={dealerScore} playerScore={playerScore} />
+      <p className="mt-5">
         <Button
           className="PlayAgainButton"
           onClick={() => {
@@ -314,7 +336,8 @@ const Game = () => {
           You lost this round&hellip;
         </span>
       </h1>
-      <p>
+      <RoundScores dealerScore={dealerScore} playerScore={playerScore} />
+      <p className="mt-5">
         <Button
           className="PlayAgainButton"
           onClick={() => {
@@ -334,7 +357,7 @@ const Game = () => {
       <h1 className="mb-4">
         <span className="font-script text-warning">React Blackjack</span>
       </h1>
-      <h2 className="mb-3 h5">How to play</h2>
+      <h2 className="mb-3 h5 font-block text-uppercase">How to play</h2>
       <p className="mb-5 lh-lg">
         Press <span className="text-uppercase fw-bold text-warning">play</span>{" "}
         to start a new round.
@@ -352,6 +375,29 @@ const Game = () => {
         Press a{" "}
         <span className="text-uppercase fw-bold text-warning">chip</span> to
         change your bet.
+      </p>
+      <p>
+        <Button
+          className="PlayAgainButton"
+          onClick={() => {
+            setShowModal(false);
+            startRound();
+          }}
+        >
+          <span>Let's Play</span>
+        </Button>
+      </p>
+    </div>
+  );
+
+  // Define game over modal content.
+  const gameOverModalContent = (
+    <div className="text-center">
+      <h1 className="mb-4">
+        <span className="font-script text-warning">Game Over</span>
+      </h1>
+      <p className="mb-5 lh-lg">
+        You're out of money. Refresh the page to start over.
       </p>
       <p>
         <Button
@@ -396,6 +442,7 @@ const Game = () => {
       />
       <GameControls
         changePlayerBet={changePlayerBet}
+        gameOver={gameOver}
         playerHit={playerHit}
         playerStay={playerStay}
         playerStaying={playerStaying}
@@ -408,6 +455,23 @@ const Game = () => {
         defaultContent={defaultModalContent}
         show={showModal}
       />
+    </div>
+  );
+};
+
+const RoundScores = ({ dealerScore, playerScore }) => {
+  return (
+    <div className="RoundScores">
+      <Row>
+        <Col className="text-center" xs={6}>
+          <h2 className="text-uppercase font-block">Dealer</h2>
+          <p className="mb-0">{dealerScore}</p>
+        </Col>
+        <Col className="text-center" xs={6}>
+          <h2 className="text-uppercase font-block">Player</h2>
+          <p className="mb-0">{playerScore}</p>
+        </Col>
+      </Row>
     </div>
   );
 };
